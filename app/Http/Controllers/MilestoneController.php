@@ -104,8 +104,9 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroyAction()
+    public function destroyAction(Request $request, $goalId, $milestoneId)
     {
+        $request->user()->goals()->find($goalId)->milestones()->find($milestoneId)->delete();
         return redirect()->route('milestones.index');
     }
 }

@@ -86,7 +86,7 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateAction(Reqiest $request, $goalId, $progressId)
+    public function updateAction(Request $request, $goalId, $progressId)
     {
         // Refactor out repeated code into private function
         $user = $request->user();
@@ -104,8 +104,10 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroyAction()
+    public function destroyAction(Request $request, $goalId, $progressId)
     {
+        $request->user()->goals()->find($goalId)->progresses()->find($progressId)->delete();
+
         return redirect()->route('progresses.index');
     }
 }

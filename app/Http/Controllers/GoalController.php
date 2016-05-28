@@ -96,8 +96,10 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroyAction()
+    public function destroyAction(Request $request, $goalId)
     {
+        $request->user()->goals()->find($goalId)->delete();
+
         return redirect()->route('goals.index');
     }
 }
