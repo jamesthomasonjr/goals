@@ -44,6 +44,7 @@ class MilestoneController extends Controller
      */
     public function createAction()
     {
+        return redirect()->route('milestones.index');
     }
 
     /**
@@ -63,6 +64,7 @@ class MilestoneController extends Controller
      */
     public function updateAction()
     {
+        return redirect()->route('milestones.index');
     }
 
     /**
@@ -72,5 +74,6 @@ class MilestoneController extends Controller
      */
     public function destroyAction()
     {
+        return redirect()->route('milestones.index');
     }
 }

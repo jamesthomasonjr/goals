@@ -44,6 +44,7 @@ class ProgressController extends Controller
      */
     public function createAction()
     {
+        return redirect()->route('progresses.index');
     }
 
     /**
@@ -63,6 +64,7 @@ class ProgressController extends Controller
      */
     public function updateAction()
     {
+        return redirect()->route('progresses.index');
     }
 
     /**
@@ -72,5 +74,6 @@ class ProgressController extends Controller
      */
     public function destroyAction()
     {
+        return redirect()->route('progresses.index');
     }
 }

@@ -42,8 +42,11 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
+        $body = $request->getContent();
+
+        return redirect()->route('goals.index');
     }
 
     /**
@@ -63,6 +66,7 @@ class GoalController extends Controller
      */
     public function updateAction()
     {
+        return redirect()->route('goals.index');
     }
 
     /**
@@ -72,5 +76,6 @@ class GoalController extends Controller
      */
     public function destroyAction()
     {
+        return redirect()->route('goals.index');
     }
 }
