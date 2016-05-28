@@ -72,7 +72,7 @@ class MilestoneController extends Controller
 
         $goal->milestones()->save($milestone);
 
-        return redirect()->route('goals.index');
+        return redirect()->route('goals.read', ['goalId' => $goalId]);
     }
 
     /**

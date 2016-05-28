@@ -72,7 +72,7 @@ class ProgressController extends Controller
 
         $goal->progresses()->save($progress);
 
-        return redirect()->route('progresses.index');
+        return redirect()->route('goals.read', ['goalId' => $goalId]);
     }
 
     /**

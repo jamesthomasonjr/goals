@@ -6,7 +6,7 @@
 @if (count($goal->milestones))
     <ul>
         @foreach ($goal->milestones as $milestone)
-            <li><a href="{!! URL::route('milestones.read', ['goalId' => $goal->id, 'milestoneId' => $milestone->id])  !!}">{!! $milestone->text !!}</a></li>
+            <li><a href="{!! URL::route('milestones.update', ['goalId' => $goal->id, 'milestoneId' => $milestone->id])  !!}">{!! $milestone->text !!}</a></li>
         @endforeach
     </ul>
 @else
@@ -20,7 +20,7 @@
 @if (count($goal->progresses))
     <ul>
         @foreach ($goal->progresses as $progress)
-            <li><a href="{!! URL::route('progresses.read', ['goalId' => $goal->id, 'progressId' => $progress->id]) !!}">{!! $progress->text !!}</a></li>
+            <li><a href="{!! URL::route('progresses.update', ['goalId' => $goal->id, 'progressId' => $progress->id]) !!}">{!! $progress->text !!}</a></li>
         @endforeach
     </ul>
 @else
