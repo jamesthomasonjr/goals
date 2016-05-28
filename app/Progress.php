@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Progress extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'text',
+    ];
+
+    /**
      * Get the Goal associated with the Progress
      */
     public function goal()
