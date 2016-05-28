@@ -67,7 +67,12 @@ class GoalController extends Controller
      */
     public function update(Request $request, $goalId)
     {
-        return view('goals.update')->with('goalId', $goalId);
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+
+        return view('goals.update')
+            ->with('goalId', $goalId)
+            ->with('text', $goal->text);
     }
 
     /**

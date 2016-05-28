@@ -70,9 +70,15 @@ class ProgressController extends Controller
      */
     public function update(Request $request, $goalId, $progressId)
     {
+        // Refactor out repeated code into private function
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+        $progress = $goal->progresses()->find($progressId);
+
         return view('progresses.update')
             ->with('goalId', $goalId)
-            ->with('progressId', $progressId);
+            ->with('progressId', $progressId)
+            ->with('text', $progress->text);
     }
 
     /**
@@ -82,6 +88,7 @@ class ProgressController extends Controller
      */
     public function updateAction(Reqiest $request, $goalId, $progressId)
     {
+        // Refactor out repeated code into private function
         $user = $request->user();
         $goal = $user->goals()->find($goalId);
         $progress = $goal->progresses()->find($progressId);

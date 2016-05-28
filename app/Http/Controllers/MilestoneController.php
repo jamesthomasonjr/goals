@@ -70,9 +70,15 @@ class MilestoneController extends Controller
      */
     public function update(Request $request, $goalId, $milestoneId)
     {
+        // Refactor out repeated code into private function
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+        $milestone = $goal->milestones()->find($milestoneId);
+
         return view('milestones.update')
             ->with('goalId', $goalId)
-            ->with('milestoneId', $milestoneId);
+            ->with('milestoneId', $milestoneId)
+            ->with('text', $milestone->text);
     }
 
     /**
@@ -82,6 +88,7 @@ class MilestoneController extends Controller
      */
     public function updateAction(Request $request, $goalId, $milestoneId)
     {
+        // Refactor out repeated code into private function
         $user = $request->user();
         $goal = $user->goals()->find($goalId);
         $milestone = $goal->milestones()->find($milestoneId);
