@@ -29,4 +29,7 @@
 
 <a href="{!! URL::route('progresses.create', ['goalId' => $goal->id]) !!}">Log new progress</a>
 
+
+<h1>Edit</h1>
+<a href="{!! URL::route('goals.update', ['goalId' => $goal->id]) !!}">Edit Goal</a>
 @endsection
