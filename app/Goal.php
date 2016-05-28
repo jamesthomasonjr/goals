@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Goal extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     */
+    protected $fillable = [
+        'text',
+    ];
+
+    /**
      * Get the User associated with the Goal
      */
     public function user()

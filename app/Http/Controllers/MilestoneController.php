@@ -22,9 +22,10 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('milestones.index');
+        $user = $request->user();
+        return view('milestones.index')->with('milestones', $user->milestones);
     }
 
     /**

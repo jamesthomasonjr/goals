@@ -22,9 +22,10 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('progresses.index');
+        $user = $request->user();
+        return view('progresses.index')->with('progresses', $user->progresses);
     }
 
     /**

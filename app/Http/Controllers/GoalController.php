@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Goal;
+
 class GoalController extends Controller
 {
     /**
@@ -22,9 +24,11 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('goals.index');
+        $user = $request->user();
+
+        return view('goals.index')->with('goals', $user->goals);
     }
 
     /**
@@ -44,7 +48,14 @@ class GoalController extends Controller
      */
     public function createAction(Request $request)
     {
-        $body = $request->getContent();
+        $user = $request->user();
+        $goalText = $request->input('text');
+
+        $goal = new Goal([
+            'text' => $goalText
+        ]);
+
+        $user->goals()->save($goal);
 
         return redirect()->route('goals.index');
     }
