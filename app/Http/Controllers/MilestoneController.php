@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Milestone;
+
 class MilestoneController extends Controller
 {
     /**
@@ -35,9 +37,9 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $goalId)
     {
-        return view('milestones.create');
+        return view('milestones.create')->with('goalId', $goalId);
     }
 
     /**
@@ -45,16 +47,20 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $goalId)
     {
         $user = $request->user();
-        $milestonetext = $request->input('text');
+        $goal = $user->goals()->find($goalId);
+
+        $milestoneText = $request->input('text');
 
         $milestone = new Milestone([
             'text' => $milestoneText
         ]);
 
-        return redirect()->route('milestones.index');
+        $goal->milestones()->save($milestone);
+
+        return redirect()->route('milestones.index', ['goalId' => $goalId]);
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Progress;
+
 class ProgressController extends Controller
 {
     /**
@@ -35,9 +37,9 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $goalId)
     {
-        return view('progresses.create');
+        return view('progresses.create')->with('goalId', $goalId);
     }
 
     /**
@@ -45,9 +47,20 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAction()
+    public function createAction(Request $request, $goalId)
     {
-        return redirect()->route('progresses.index');
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+
+        $progressText = $request->input('text');
+
+        $progress = new Progress([
+            'text' => $progressText
+        ]);
+
+        $goal->progresses()->save($progress);
+
+        return redirect()->route('progresses.index', ['goalId' => $goalId]);
     }
 
     /**
