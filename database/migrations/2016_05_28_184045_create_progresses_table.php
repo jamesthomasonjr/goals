@@ -14,6 +14,9 @@ class CreateProgressesTable extends Migration
     {
         Schema::create('progresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('goal_id')->unsigned();
+            $table->foreign('goal_id')->references('id')->on('goals');
+            $table->string('text');
             $table->timestamps();
         });
     }

@@ -14,6 +14,9 @@ class CreateMilestonesTable extends Migration
     {
         Schema::create('milestones', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('goal_id')->unsigned();
+            $table->foreign('goal_id')->references('id')->on('goals');
+            $table->string('text');
             $table->timestamps();
         });
     }

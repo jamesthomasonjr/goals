@@ -23,4 +23,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the Goals associated with the User
+     */
+    public function goals()
+    {
+        return $this->hasMany('App\Goal');
+    }
+
+    /**
+     * Get the Milestones associated with the User
+     */
+    public function milestones()
+    {
+        return $this->hasManyThrough('App\Milestone', 'App\Goal');
+    }
+
+    /**
+     * Get the Progresses associated with the User
+     */
+    public function progresses()
+    {
+        return $this->hasManyThrough('App\Progress', 'App\Goal');
+    }
 }
