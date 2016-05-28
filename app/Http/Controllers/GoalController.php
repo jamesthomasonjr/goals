@@ -65,9 +65,9 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $goalId)
     {
-        return view('goals.update');
+        return view('goals.update')->with('goalId', $goalId);
     }
 
     /**
@@ -75,8 +75,14 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateAction()
+    public function updateAction(Request $request, $goalId)
     {
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+
+        $goal->text = $request->input('text');
+        $goal->save();
+
         return redirect()->route('goals.index');
     }
 

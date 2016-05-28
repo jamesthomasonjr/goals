@@ -68,9 +68,11 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $goalId, $milestoneId)
     {
-        return view('milestones.update');
+        return view('milestones.update')
+            ->with('goalId', $goalId)
+            ->with('milestoneId', $milestoneId);
     }
 
     /**
@@ -78,9 +80,16 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateAction()
+    public function updateAction(Request $request, $goalId, $milestoneId)
     {
-        return redirect()->route('milestones.index');
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+        $milestone = $goal->milestones()->find($milestoneId);
+
+        $milestone->text = $request->input('text');
+        $milestone->save();
+
+        return redirect()->route('milestones.index', ['goalId' => $goalId]);
     }
 
     /**

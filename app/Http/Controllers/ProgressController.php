@@ -68,9 +68,11 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $goalId, $progressId)
     {
-        return view('progresses.update');
+        return view('progresses.update')
+            ->with('goalId', $goalId)
+            ->with('progressId', $progressId);
     }
 
     /**
@@ -78,9 +80,16 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateAction()
+    public function updateAction(Reqiest $request, $goalId, $progressId)
     {
-        return redirect()->route('progresses.index');
+        $user = $request->user();
+        $goal = $user->goals()->find($goalId);
+        $progress = $goal->progresses()->find($progressId);
+
+        $progress->text = $request->input('text');
+        $progress->save();
+
+        return redirect()->route('progresses.index', ['goalId', $goalId]);
     }
 
     /**
