@@ -22,10 +22,12 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $goalId)
     {
         $user = $request->user();
-        return view('milestones.index')->with('milestones', $user->milestones);
+        $goal = $user->goals()->find($goalId);
+
+        return view('milestones.index')->with('milestones', $goal->milestones);
     }
 
     /**
@@ -43,8 +45,15 @@ class MilestoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
+        $user = $request->user();
+        $milestonetext = $request->input('text');
+
+        $milestone = new Milestone([
+            'text' => $milestoneText
+        ]);
+
         return redirect()->route('milestones.index');
     }
 
