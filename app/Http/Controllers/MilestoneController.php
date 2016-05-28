@@ -33,6 +33,18 @@ class MilestoneController extends Controller
     }
 
     /**
+     *
+     *
+     *
+     */
+    public function read(Request $request, $goalId, $milestoneId)
+    {
+        return view('milestones.read')
+            ->with('goalId', $goalId)
+            ->with('milestoneId', $milestoneId);
+    }
+
+    /**
      * Show the Create Milestone form.
      *
      * @return \Illuminate\Http\Response

@@ -33,6 +33,18 @@ class ProgressController extends Controller
     }
 
     /**
+     *
+     *
+     *
+     */
+    public function read(Request $request, $goalId, $progressId)
+    {
+        return view('progresses.read')
+            ->with('goalId', $goalId)
+            ->with('progressId', $progressId);
+    }
+
+    /**
      * Show the Create Progress form.
      *
      * @return \Illuminate\Http\Response

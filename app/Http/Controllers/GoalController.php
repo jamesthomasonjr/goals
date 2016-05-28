@@ -32,6 +32,18 @@ class GoalController extends Controller
     }
 
     /**
+     *
+     *
+     *
+     */
+    public function read(Request $request, $goalId)
+    {
+        $goal = $request->user()->goals()->find($goalId);
+
+        return view('goals.read')->with('goal', $goal);
+    }
+
+    /**
      * Show the Create Goal form.
      *
      * @return \Illuminate\Http\Response
